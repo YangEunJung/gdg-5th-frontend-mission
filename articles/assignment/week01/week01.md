@@ -1,4 +1,3 @@
-```markdown
 # Mission Course Week1
 안녕하세요 이번 미션 트랙에 오신 것을 환영해요!<br>
 우리는 4주 동안 하나의 쇼핑몰 웹사이트를 함께 만들어 볼 예정이에요. 
@@ -152,5 +151,3 @@ ProjectTrack
  ┃
  ┗ README.md
  ```
-
-```

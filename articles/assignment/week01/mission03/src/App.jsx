@@ -3,10 +3,14 @@ import './App.css';
 
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import ManagerNavbar from "./components/ManagerNavbar";
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import ItemSort from "./pages/ItemSort";
 import Price from "./pages/Price";
+import Addition from "./pages/Addition";
+import Registration from "./pages/Registration";
+import Delete from "./pages/Delete";
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -21,14 +25,32 @@ function App() {
     else if (currentPage === 'price'){
       return (<Price/>);
     }
-     else if (currentPage === 'itemSort'){
+    else if (currentPage === 'itemSort'){
       return (<ItemSort/>);
+    }
+    else if (currentPage === 'addition'){
+      return (<Addition/>);
+    }
+    else if (currentPage === 'registration'){
+      return (<Registration/>);
+    }
+    else if (currentPage === 'delete'){
+      return (<Delete/>);
+    }
+  }
+
+  function navbarRendering(){
+    if (currentPage === 'registration' || currentPage === 'addition' || currentPage === 'delete'){
+      return <ManagerNavbar setPage={setCurrentPage}/>
+    }
+    else{
+      return <Navbar setPage={setCurrentPage}/>
     }
   }
   
   return (
     <div className="relative min-h-screen pb-[100px]">
-      <Navbar setPage={setCurrentPage}/>
+      {navbarRendering()}
       <main>
         {renderingPage()}
       </main>

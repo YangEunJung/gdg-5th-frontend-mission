@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 import Footer from "./components/Footer";
@@ -11,10 +11,42 @@ import Price from "./pages/Price";
 import Addition from "./pages/Addition";
 import Registration from "./pages/Registration";
 import Delete from "./pages/Delete";
+const serverURL = import.meta.env.REACT_APP_SERVER_URL;
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   
+  const [users, setUsers] = useState([]);
+  
+
+  useEffect(() => {
+      async function get() {
+        try{  
+          //const url = serverURL;
+          const res = await fetch(`${API_URL}/products`, {
+            method: 'GET',
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+
+            if (res.ok){
+              const content = await res.json();
+              console.log("데이터 도착 확인:", content.data);
+              setUsers(content.data);
+            }
+            else{
+              throw Error("데이터를 가져오지 못했습니다.");
+            }
+        }
+        catch(err){
+          console.error(err);
+        }
+      }
+
+      get();
+  }, []);
+
   function renderingPage(){
     if (currentPage === 'home'){
       return (<Home/>);
